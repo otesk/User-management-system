@@ -1,0 +1,22 @@
+body{
+    text-align: center;
+}
+
+.container{
+    margin-top: 100px;
+}
+
+.card-header{
+    max-height: 200px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn-info{
+    width: 60px;
+    height: 25px;
+    font-size: small;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
