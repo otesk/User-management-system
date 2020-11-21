@@ -10,9 +10,9 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
- * Java-class that validates data from the request for {@link com.otesk.ums.controllers.UserAccountController}
+ * Java-class that validates data from the request for {@link com.otesk.ums.controllers.UserAccountController}.
  *
- * @author Aliaksei Dvornichenko
+ * @author Aleksey Dvornichenko
  * @version 1.0
  */
 

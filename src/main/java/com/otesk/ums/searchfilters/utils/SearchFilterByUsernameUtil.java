@@ -2,6 +2,14 @@ package com.otesk.ums.searchfilters.utils;
 
 import java.util.Arrays;
 
+/**
+ * Java-class used to calculate the Levenshtein distance between the string entered in the
+ * {@link com.otesk.ums.searchfilters.impl.SearchFilterByUsername} and username of {@link com.otesk.ums.domain.UserAccount}.
+ *
+ * @version 1.0
+ * @author Aleksey Dvornichenko
+ */
+
 public class SearchFilterByUsernameUtil {
     public static int calculateLevenshteinDistance(String str1, String str2) {
         int[][] matrix = new int[str1.length() + 1][str2.length() + 1];

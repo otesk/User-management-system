@@ -6,8 +6,7 @@ body{
     margin-top: 100px;
 }
 
-.card-header{
-    max-height: 200px;
+.custom-header{
     display: flex;
     justify-content: space-around;
 }

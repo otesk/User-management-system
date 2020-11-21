@@ -6,6 +6,10 @@ import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * Java class representing data about a user account.
+ */
+
 @Data
 @Builder
 @NoArgsConstructor

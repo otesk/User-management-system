@@ -19,6 +19,9 @@ public enum Role{
     USER(Set.of(Permission.USERS_READ)),
     ADMIN(Set.of(Permission.USERS_READ, Permission.USERS_WRITE));
 
+    /**
+     * Field for storing set of permissions.
+     */
     private final Set<Permission> permissions;
 
     public Set<SimpleGrantedAuthority> getAuthorities(){

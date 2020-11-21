@@ -28,7 +28,7 @@ input[type="checkbox"]:before{
     background: #d1d1d1;
     top: -2px;
     left: 0;
-    transition: .5s;
+    transition: .1s;
 }
 
 input:checked[type="checkbox"]:before{

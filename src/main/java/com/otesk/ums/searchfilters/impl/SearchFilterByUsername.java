@@ -7,6 +7,7 @@ import com.otesk.ums.searchfilters.SearchFilter;
 import com.otesk.ums.searchfilters.utils.SearchFilterByUsernameComparator;
 import com.otesk.ums.searchfilters.utils.SearchFilterByUsernameUtil;
 import lombok.AllArgsConstructor;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -18,9 +19,11 @@ public class SearchFilterByUsername implements SearchFilter {
 
     @Override
     public List<UserAccount> findAllByFilter(List<UserAccount> userAccounts, SearchFilterDTO searchFilterDTO) {
-        if (searchFilterDTO.getUsernameForSearchFilter() != null && !searchFilterDTO.getUsernameForSearchFilter().isEmpty()) {
+        if (!StringUtils.isEmpty(searchFilterDTO.getUsernameForSearchFilter())) {
             Map<UserAccount, Integer> userAccountMap = new TreeMap<>(new SearchFilterByUsernameComparator());
-            userAccounts.forEach(userAccount -> userAccountMap.put(userAccount,
+            userAccounts.stream()
+                    .filter(userAccount -> userAccount.getUsername().contains(searchFilterDTO.getUsernameForSearchFilter()))
+                    .forEach(userAccount -> userAccountMap.put(userAccount,
                     SearchFilterByUsernameUtil.calculateLevenshteinDistance(searchFilterDTO.getUsernameForSearchFilter(), userAccount.getUsername())));
             userAccounts = userAccountMap.entrySet().stream()
                     .sorted(Map.Entry.comparingByValue())

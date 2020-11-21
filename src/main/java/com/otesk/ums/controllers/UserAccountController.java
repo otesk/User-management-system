@@ -17,7 +17,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Map;
 
 
@@ -36,29 +35,28 @@ public class UserAccountController {
     private final UserAccountService userAccountService;
 
     @GetMapping
-    public String viewUserAccountList(@RequestParam Map<String, String> form,
+    public String getUserAccountListPage(@RequestParam Map<String, String> form,
                                       Model model,
                                       @PageableDefault Pageable pageable) {
-        Page<UserAccount> page;
         SearchFilterDTO searchFilterDTO = SearchFilterDTO.createSearchFilterFromForm(form);
-        page = userAccountService.findAllByFilter(pageable, searchFilterDTO);
+        Page<UserAccount> page = userAccountService.findAllByFilter(pageable, searchFilterDTO);
         model.addAttribute("searchFilter", searchFilterDTO);
         model.addAttribute("roles", Role.values());
-        model.addAttribute("url", "/user");
         model.addAttribute("page", page);
         return "userAccountList";
     }
 
     @GetMapping("/{id}")
-    public String viewUserAccount(@PathVariable Long id, Model model) {
-        model.addAttribute("userAccounts", List.of(userAccountService.findById(id)));
-        return "userAccount";
+    public String getUserAccountPage(@PathVariable("id") UserAccount userAccount, Model model) {
+        if (userAccount != null) model.addAttribute("user", userAccount);
+        else return "redirect:/user";
+        return "userAccountPage";
     }
 
     @PreAuthorize("hasAuthority('users:write')")
-    @PostMapping("/{id}")
-    public String changeStatusOfUserAccount(@PathVariable Long id) {
-        userAccountService.changeStatusOfUserAccount(userAccountService.findById(id));
+    @PutMapping("/{id}")
+    public String changeStatusOfUserAccount(@PathVariable("id") UserAccount userAccount) {
+        userAccountService.changeStatusOfUserAccount(userAccount);
         return "redirect:/user/{id}";
     }
 
@@ -66,12 +64,13 @@ public class UserAccountController {
     @GetMapping("/{id}/edit")
     public String getUserAccountEditForm(@PathVariable("id") UserAccount userAccount,
                                          Model model) {
-        model.addAttribute("userAccount", userAccount);
+        if (userAccount != null) model.addAttribute("userAccount", userAccount);
+        else return "redirect:/user";
         return "userAccountEdit";
     }
 
     @PreAuthorize("hasAuthority('users:write')")
-    @PostMapping("/{id}/edit")
+    @PutMapping("/{id}/edit")
     public String userEdit(@PathVariable("id") UserAccount userAccount,
                            @Valid UserAccountDTO userAccountDTO,
                            BindingResult bindingResult,
@@ -108,7 +107,7 @@ public class UserAccountController {
     }
 
     @PreAuthorize("hasAuthority('users:write')")
-    @GetMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     public String deleteUserAccount(@PathVariable("id") Long id) {
         userAccountService.deleteUserAccountById(id);
         return "redirect:/user";

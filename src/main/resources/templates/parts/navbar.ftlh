@@ -1,4 +1,4 @@
-<#include "security.ftl">
+<#include "security.ftlh">
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/">UMS</a>
@@ -12,9 +12,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/user">All users</a>
-            </li>
+            <#if known>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user">All users</a>
+                </li>
+            </#if>
             <#if isAdmin>
                 <li class="nav-item">
                     <a class="nav-link" href="/user/new">Add new user</a>

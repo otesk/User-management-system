@@ -13,5 +13,8 @@ public enum Permission {
     USERS_READ("users:read"),
     USERS_WRITE("users:write");
 
+    /**
+     * Field for storing string representation of permission.
+     */
     private final String permission;
 }
