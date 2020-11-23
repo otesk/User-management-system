@@ -18,7 +18,7 @@
                 Actions available to you:
                 <ul>
                     <li><a href="/user">View user list</a>;</li>
-                    <li><a href="/user">View any user's details</a><#if !isAdmin>.</#if></li>
+                    <li><a href="/user">View any user's details</a><#if !isAdmin>.<#else>;</#if></li>
                     <#if isAdmin>
                         <li><a href="/user/new">Create a new user</a>;</li>
                         <li><a href="/user">Editing an existing user</a>;</li>
