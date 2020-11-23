@@ -1,7 +1,7 @@
 package com.otesk.ums.domain;
 
 /**
- * Java class representing status of {@link UserAccount}
+ * Simple JavaBean object that represents status of {@link UserAccount}.
  */
 
 public enum Status {

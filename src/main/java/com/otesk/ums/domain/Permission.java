@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * Simple class that describes the {@link Role} permission of {@link UserAccount}
+ * Java class that describes the {@link Role} permission of {@link UserAccount}.
  */
 
 @Getter

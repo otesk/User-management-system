@@ -17,8 +17,6 @@ public interface UserAccountService {
 
     UserAccount findByUsername(String username);
 
-    UserAccount findById(Long id);
-
     boolean registerUserAccount(UserAccountDTO userAccountDTO);
 
     void editUserAccount(UserAccount userAccount, UserAccountDTO userAccountDTO);

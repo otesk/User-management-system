@@ -1,4 +1,4 @@
-package com.otesk.ums;
+package com.otesk.ums.integration;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

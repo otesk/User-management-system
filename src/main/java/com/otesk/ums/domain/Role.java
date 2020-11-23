@@ -7,15 +7,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Simple JavaBean object that represents role of {@link UserAccount}
- *
- * @author Aliaksei Dvornichenko
- * @version 1.0
+ * Simple JavaBean object that represents role of {@link UserAccount}.
  */
 
 @Getter
 @AllArgsConstructor
-public enum Role{
+public enum Role {
     USER(Set.of(Permission.USERS_READ)),
     ADMIN(Set.of(Permission.USERS_READ, Permission.USERS_WRITE));
 
@@ -24,7 +21,12 @@ public enum Role{
      */
     private final Set<Permission> permissions;
 
-    public Set<SimpleGrantedAuthority> getAuthorities(){
+    /**
+     * Converts permission set to {@link SimpleGrantedAuthority} set.
+     *
+     * @return set of simple granted authorities
+     */
+    public Set<SimpleGrantedAuthority> getAuthorities() {
         return getPermissions().stream()
                 .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
                 .collect(Collectors.toSet());

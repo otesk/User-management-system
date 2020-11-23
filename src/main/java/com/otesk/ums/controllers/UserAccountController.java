@@ -22,9 +22,6 @@ import java.util.Map;
 
 /**
  * Controller for {@link UserAccount}'s pages.
- *
- * @author Aliaksei Dvornichenko
- * @version 1.0
  */
 
 @AllArgsConstructor
@@ -32,12 +29,23 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserAccountController {
 
+    /**
+     * Field for working with business logic.
+     */
     private final UserAccountService userAccountService;
 
+    /**
+     * Displays a list of user accounts.
+     *
+     * @param form     for storing parameters from request
+     * @param model    for storing attributes used to render view
+     * @param pageable to ensure pagination
+     * @return view of user account list
+     */
     @GetMapping
     public String getUserAccountListPage(@RequestParam Map<String, String> form,
-                                      Model model,
-                                      @PageableDefault Pageable pageable) {
+                                         Model model,
+                                         @PageableDefault Pageable pageable) {
         SearchFilterDTO searchFilterDTO = SearchFilterDTO.createSearchFilterFromForm(form);
         Page<UserAccount> page = userAccountService.findAllByFilter(pageable, searchFilterDTO);
         model.addAttribute("searchFilter", searchFilterDTO);
@@ -46,6 +54,13 @@ public class UserAccountController {
         return "userAccountList";
     }
 
+    /**
+     * Displays a user with a specific id.
+     *
+     * @param userAccount for storing {@link UserAccount} with specific id
+     * @param model       for storing attributes used to render view
+     * @return page of user account with id from request
+     */
     @GetMapping("/{id}")
     public String getUserAccountPage(@PathVariable("id") UserAccount userAccount, Model model) {
         if (userAccount != null) model.addAttribute("user", userAccount);
@@ -53,6 +68,12 @@ public class UserAccountController {
         return "userAccountPage";
     }
 
+    /**
+     * Changes user account status.
+     *
+     * @param userAccount for storing {@link UserAccount} with specific id
+     * @return page of user account with id from request
+     */
     @PreAuthorize("hasAuthority('users:write')")
     @PutMapping("/{id}")
     public String changeStatusOfUserAccount(@PathVariable("id") UserAccount userAccount) {
@@ -60,6 +81,13 @@ public class UserAccountController {
         return "redirect:/user/{id}";
     }
 
+    /**
+     * Displays a form for editing user account data with id from the request.
+     *
+     * @param userAccount for storing {@link UserAccount} with specific id
+     * @param model       for storing attributes used to render view
+     * @return page to edit user account with id from request
+     */
     @PreAuthorize("hasAuthority('users:write')")
     @GetMapping("/{id}/edit")
     public String getUserAccountEditForm(@PathVariable("id") UserAccount userAccount,
@@ -69,6 +97,18 @@ public class UserAccountController {
         return "userAccountEdit";
     }
 
+    /**
+     * Updates user account data with id from request.
+     *
+     * @param userAccount    for storing {@link UserAccount} with specific id
+     * @param userAccountDTO for storing form data for validation
+     * @param bindingResult  for storing validation errors
+     * @param model          for storing attributes used to render view
+     * @return <ul>
+     * <li>page to edit user account with id from request if validation was failed</li>
+     * <li>page with list of user accounts if the validation was successful</li>
+     * </ul>
+     */
     @PreAuthorize("hasAuthority('users:write')")
     @PutMapping("/{id}/edit")
     public String userEdit(@PathVariable("id") UserAccount userAccount,
@@ -84,12 +124,29 @@ public class UserAccountController {
         return "redirect:/user";
     }
 
+    /**
+     * Displays form for creating new user account.
+     *
+     * @return page for creating a new user account
+     */
     @PreAuthorize("hasAuthority('users:write')")
     @GetMapping("/new")
     public String registration() {
         return "registration";
     }
 
+    /**
+     * Creates a new user account.
+     *
+     * @param userAccountDTO for storing form data for validation
+     * @param bindingResult  for storing validation errors
+     * @param model          for storing attributes used to render view
+     * @return <ul>
+     * <li>page to create new user account with id from request if validation was failed</li>
+     * <li>page to create new user account with id from request if user account with the same username already exists</li>
+     * <li>page with list of user accounts in other cases</li>
+     * </ul>
+     */
     @PreAuthorize("hasAuthority('users:write')")
     @PostMapping("/new")
     public String registerUserAccount(@Valid UserAccountDTO userAccountDTO,
@@ -106,6 +163,12 @@ public class UserAccountController {
         return "redirect:/user";
     }
 
+    /**
+     * Deletes user account.
+     *
+     * @param id for storing user account id
+     * @return page with user accounts
+     */
     @PreAuthorize("hasAuthority('users:write')")
     @DeleteMapping("/{id}")
     public String deleteUserAccount(@PathVariable("id") Long id) {

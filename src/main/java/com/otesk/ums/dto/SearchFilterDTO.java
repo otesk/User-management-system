@@ -14,20 +14,17 @@ import java.util.stream.Collectors;
 
 /**
  * Java-class used to store the filtering parameters of the list of {@link com.otesk.ums.domain.UserAccount}.
- *
- * @author Aleksey Dvornichenko
- * @version 1.0
  */
 
 @Getter
 @Setter
 public class SearchFilterDTO {
     /**
-     * Field to store the string for filtering.
+     * Stores the string for filtering.
      */
     private String usernameForSearchFilter;
     /**
-     * Field for storing set of roles for filtering.
+     * Stores set of roles for filtering.
      */
     private Set<Role> rolesForSearchFilter;
 

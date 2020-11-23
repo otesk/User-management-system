@@ -12,8 +12,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-
-
+/**
+ * Java class for security layer.
+ */
 @Data
 @AllArgsConstructor
 public class SecurityUserAccount implements UserDetails {
@@ -58,7 +59,13 @@ public class SecurityUserAccount implements UserDetails {
         return isActive;
     }
 
-    public static UserDetails fromUserAccount(UserAccount userAccount){
+    /**
+     * Converts data from user account to {@link UserDetails} object.
+     *
+     * @param userAccount stores data of user account.
+     * @return new instance of {@link UserDetails}.
+     */
+    public static UserDetails fromUserAccount(UserAccount userAccount) {
         return new User(userAccount.getUsername(),
                 userAccount.getPassword(),
                 userAccount.getStatus().equals(Status.ACTIVE),
@@ -68,8 +75,7 @@ public class SecurityUserAccount implements UserDetails {
                 userAccount.getRole().getAuthorities());
     }
 
-    public boolean isAdmin(){
+    public boolean isAdmin() {
         return true;
     }
-
 }

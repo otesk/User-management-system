@@ -1,0 +1,13 @@
+com.otesk.ums
+com.otesk.ums.configs
+com.otesk.ums.controllers
+com.otesk.ums.domain
+com.otesk.ums.dto
+com.otesk.ums.repositories
+com.otesk.ums.searchfilters
+com.otesk.ums.searchfilters.impl
+com.otesk.ums.searchfilters.utils
+com.otesk.ums.security
+com.otesk.ums.services
+com.otesk.ums.services.impl
+com.otesk.ums.validation

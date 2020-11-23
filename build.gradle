@@ -47,6 +47,10 @@ dependencies {
     compile group: 'javax.el', name: 'javax.el-api', version: '3.0.0'
     // https://mvnrepository.com/artifact/org.junit.vintage/junit-vintage-engine
     testCompile group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '5.7.0'
+    // https://mvnrepository.com/artifact/org.mockito/mockito-core
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '3.6.0'
+    // https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin
+    compile group: 'org.apache.maven.plugins', name: 'maven-javadoc-plugin', version: '3.2.0'
 
 }
 
