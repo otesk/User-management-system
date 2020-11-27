@@ -55,7 +55,7 @@ The bcrypt algorithm was used to
 encode passwords when writing to the database.
 
 To filter by the username, was used a sorting algorithm 
-for ascending editorial distance (Levenshtein distance) 
+for ascending editorial distance ([Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance#:~:text=Informally%2C%20the%20Levenshtein%20distance%20between,considered%20this%20distance%20in%201965.)) 
 for usernames, then the resulting list of users 
 was sorted alphabetically.
 
